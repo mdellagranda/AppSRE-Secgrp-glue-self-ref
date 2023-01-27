@@ -1,2 +1,2 @@
 # AppSRE-Secgrp-glue-self-ref
-Self reference security rules for glue
+The purpose of this SG is to enable access from AWS Glue jobs to MCK on-premise DBs.

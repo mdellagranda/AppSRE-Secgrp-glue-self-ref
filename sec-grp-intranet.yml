@@ -17,12 +17,12 @@ Resources:
       ToPort: 65535
       DestinationSecurityGroupId:
         Fn::GetAtt:
-          - TargetSG: !Sub Intranet-SG
-          - GroupId: !Sub SGR-Intranet
+          SourceSecurityGroupOwnerId: !GetAtt SGR-Intranet.SourceSecurityGroup.OwnerAlias
+          SourceSecurityGroupName: !GetAtt SGR-Intranet.SourceSecurityGroup.GroupName
       GroupId:
         Fn::GetAtt:
-          - SourceSG: !Sub SGR-mygluejob
-          - GroupId: !Sub SGR-myapp
+          SourceSecurityGroupOwnerId: !GetAtt SGR-mygluejob.SourceSecurityGroup.OwnerAlias
+          SourceSecurityGroupName: !GetAtt SGR-mygluejob.SourceSecurityGroup.GroupName
   InboundRule:
     Type: AWS::EC2::SecurityGroupIngress
     Properties:
@@ -31,12 +31,12 @@ Resources:
       ToPort: 65535
       SourceSecurityGroupId:
         Fn::GetAtt:
-          - SourceSG: !Sub Intranet-SG
-          - GroupId: !Sub SGR-Intranet
+          SourceSecurityGroupOwnerId: !GetAtt SGR-Intranet.SourceSecurityGroup.OwnerAlias
+          SourceSecurityGroupName: !GetAtt SGR-Intranet.SourceSecurityGroup.GroupName
       GroupId:
         Fn::GetAtt:
-          - TargetSG: !Sub SGR-mygluejob
-          - GroupId: !Sub SGR-myapp
+          SourceSecurityGroupOwnerId: !GetAtt SGR-mygluejob.SourceSecurityGroup.OwnerAlias
+          SourceSecurityGroupName: !GetAtt SGR-mygluejob.SourceSecurityGroup.GroupName
 
 #Additional security groups
 

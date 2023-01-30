@@ -1,5 +1,5 @@
 Resources:
-  GlueSourceSG-Databases:
+  GlueSourceSGdbs:
     Type: AWS::EC2::SecurityGroup
     Properties:
       VpcId: !Sub vpc-mygluejobs

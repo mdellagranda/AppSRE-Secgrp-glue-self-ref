@@ -9,7 +9,7 @@ Resources:
     Properties:
       #VpcId: !Sub vpc-intranet
       GroupDescription: Self referencing security group
-  OutboundRule: 
+  OutboundRule: ''
     Type: AWS::EC2::SecurityGroupEgress
     Properties:
       IpProtocol: tcp

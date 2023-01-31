@@ -1,5 +1,5 @@
 Resources:
-  Secgrpglueselfref:
+  sgselfref:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: "Allows all traffic within the security group"
@@ -7,9 +7,11 @@ Resources:
         - IpProtocol: -1
           FromPort: 0
           ToPort: 65535
-          SourceSecurityGroupId: Secgrpglueselfref
+          CidrIp: 0.0.0.0/0
+          SourceSecurityGroupId: !Ref sgselfref
       SecurityGroupEgress:
         - IpProtocol: -1
           FromPort: 0
           ToPort: 65535
-          SourceSecurityGroupId: Secgrpglueselfref
+          CidrIp: 0.0.0.0/0
+          SourceSecurityGroupId: !Ref sgselfref

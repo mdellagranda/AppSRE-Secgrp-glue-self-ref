@@ -2,13 +2,13 @@ Resources:
   GlueSourceSGdbs:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      VpcId: !Sub vpc-mygluejobs
+#      VpcId: !Sub vpc-mygluejobs
       GroupDescription: Security Group to allow AWS services to access on-premise DBs
   GlueTargetSG:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      VpcId: !Sub vpc-intranet
-      GroupDescription: Sample target security group
+      #VpcId: !Sub vpc-intranet
+      GroupDescription: Self referencing security group
   OutboundRule: 
     Type: AWS::EC2::SecurityGroupEgress
     Properties:

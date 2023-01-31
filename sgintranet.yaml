@@ -11,6 +11,15 @@ Resources:
       GroupId: !GetAtt TargetSG.GroupId
       IpProtocol: -1
       FromPort: 0
-      ToPort: 65
+      ToPort: 65535
+      SourceSecurityGroupId: sg-glue-self-ref
+      SourceSecurityGroupOwnerId: '123456789012'
+  OutboundRule:
+    Type: 'AWS::EC2::SecurityGroupIngress'
+    Properties:
+      GroupId: !GetAtt TargetSG.GroupId
+      IpProtocol: -1
+      FromPort: 0
+      ToPort: 65535
       SourceSecurityGroupId: sg-glue-self-ref
       SourceSecurityGroupOwnerId: '123456789012'

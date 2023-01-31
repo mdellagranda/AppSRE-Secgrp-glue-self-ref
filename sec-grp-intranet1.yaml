@@ -4,13 +4,12 @@ Resources:
     Properties:
       GroupDescription: "Allows all traffic within the security group"
       SecurityGroupIngress:
-      - IpProtocol: -1
-        FromPort: 0
-        ToPort: 65535
-        SourceSecurityGroupId: !Ref Secgrp-glue-self-ref
+        - IpProtocol: -1
+          FromPort: 0
+          ToPort: 65535
+          SourceSecurityGroupId: !Ref Secgrp-glue-self-ref
       SecurityGroupEgress:
-      - IpProtocol: -1
-        FromPort: 0
-        ToPort: 65535
-        SourceSecurityGroupId: !Ref Secgrp-glue-self-ref
-        !R
+        - IpProtocol: -1
+          FromPort: 0
+          ToPort: 65535
+          SourceSecurityGroupId: !Ref Secgrp-glue-self-ref

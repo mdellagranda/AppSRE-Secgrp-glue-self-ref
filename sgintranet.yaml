@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  TargetSG:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+#      VpcId: vpc-XXXXXXX
+      GroupDescription: Security group will allow access to/from intranet
+  InboundRule:
+    Type: 'AWS::EC2::SecurityGroupIngress'
+    Properties:
+      GroupId: !GetAtt TargetSG.GroupId
+      IpProtocol: -1
+      FromPort: 0
+      ToPort: 65
+      SourceSecurityGroupId: sg-glue-self-ref
+      SourceSecurityGroupOwnerId: '123456789012'

@@ -1,25 +1,38 @@
-AWSTemplateFormatVersion: 2010-09-09
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: HTTPS - Security Group to access on-prem services
+Parameters:
+  VPC:
+    Type: AWS::EC2::VPC::Id
+    Description: VPC for the Intranet Security Group
+  Name:
+    Type: String
+    Description: ecgrp-glue-self-ref
+  Description:
+    Type: String
+    Description: SG-glue-self-ref
 Resources:
-  TargetSG:
-    Type: 'AWS::EC2::SecurityGroup'
+  GLUESG:
+    Type: AWS::EC2::SecurityGroup
     Properties:
-#      VpcId: vpc-XXXXXXX
-      GroupDescription: Security group will allow access to/from intranet
-  InboundRule:
-    Type: 'AWS::EC2::SecurityGroupIngress'
-    Properties:
-      GroupId: !GetAtt TargetSG.GroupId
-      IpProtocol: -1
-      FromPort: 0
-      ToPort: 65535
-      SourceSecurityGroupId: sg-glue-self-ref
-      SourceSecurityGroupOwnerId: '123456789012'
-  OutboundRule:
-    Type: 'AWS::EC2::SecurityGroupIngress'
-    Properties:
-      GroupId: !GetAtt TargetSG.GroupId
-      IpProtocol: -1
-      FromPort: 0
-      ToPort: 65535
-      SourceSecurityGroupId: sg-glue-self-ref
-      SourceSecurityGroupOwnerId: '123456789012'
+      GroupDescription:
+        Ref: Description
+      VpcId:
+        Ref: VPC
+      SecurityGroupIngress:
+      - IpProtocol: -1
+        FromPort: '0'
+        ToPort: '65535'
+#      - IpProtocol: tcp
+#        CidrIp: 54.228.16.0/26
+#        FromPort: '443'
+#        ToPort: '443'
+      SecurityGroupEgress:
+      - IpProtocol: -1
+        FromPort: '0'
+        ToPort: '65535'
+Outputs:
+  SecurityGroupID:
+    Description: Security Group ID
+    Value:
+      Ref: GLUESG

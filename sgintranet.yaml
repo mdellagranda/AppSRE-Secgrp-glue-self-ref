@@ -1,6 +1,7 @@
 ---
 AWSTemplateFormatVersion: '2010-09-09'
 Description: HTTPS - Security Group to access on-prem services
+
 Parameters:
   VPC:
     Type: AWS::EC2::VPC::Id
@@ -11,14 +12,19 @@ Parameters:
   Description:
     Type: String
     Description: SG-glue-self-ref
+    AllowedValues:
+      - GLUESG
+
+Conditions:
+  SourceSecurityGroupId: !Equals [!Ref VPC, GLUESG]
+
 Resources:
   GLUESG:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription:
         Ref: Description
-      VpcId:
-        Ref: VPC
+      VpcId: Equals [!Ref VPC]
       SecurityGroupIngress:
       - IpProtocol: -1
         FromPort: '0'
@@ -31,6 +37,7 @@ Resources:
       - IpProtocol: -1
         FromPort: '0'
         ToPort: '65535'
+
 Outputs:
   SecurityGroupID:
     Description: Security Group ID
